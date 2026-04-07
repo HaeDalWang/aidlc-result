@@ -28,7 +28,15 @@
       "Bash(git stash:*)",
       "Bash(npm --version)",
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(curl -s http://0.0.0.0:8000/)",
+      "Bash(pkill -f uvicorn)",
+      "Bash(pkill -f \"uvicorn main\")",
+      "Bash(curl -s http://127.0.0.1:8000/)",
+      "Bash(curl -s http://127.0.0.1:8000/customer/)",
+      "Bash(curl -s http://127.0.0.1:8000/assets/index-lIkH7JtE.js)",
+      "Bash(curl -s http://127.0.0.1:8000/customer/assets/index-DXuIwmVq.js)",
+      "Bash(curl -s -X POST http://127.0.0.1:8000/api/auth/table-login -H 'Content-Type: application/json' -d '{\"store_identifier\":\"demo-store\",\"table_number\":1,\"table_password\":\"1111\"}')"
     ]
   }
 }
