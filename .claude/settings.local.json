@@ -3,7 +3,24 @@
     "allow": [
       "Bash(git branch:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git remote:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Read(//home/ec2-user/**)",
+      "Bash(cp /home/ec2-user/environment/id_ed25519_haedal /home/ec2-user/.ssh/id_ed25519_haedal)",
+      "Bash(chmod 600 /home/ec2-user/.ssh/id_ed25519_haedal)",
+      "Bash(ssh:*)",
+      "Bash(chmod 600 /home/ec2-user/.ssh/config)",
+      "Bash(pip install:*)",
+      "Bash(pip3 install:*)",
+      "Bash(python3 -m pip install -r /home/ec2-user/environment/aidlc-table-order/requirements.txt -q)",
+      "Bash(curl -sS https://bootstrap.pypa.io/get-pip.py)",
+      "Bash(python3)",
+      "Bash(python3 -m pip install -r requirements.txt -q)",
+      "Bash(python3:*)",
+      "Bash(curl -s http://localhost:8000/)",
+      "Bash(curl -s -X POST http://localhost:8000/api/auth/admin-login -H 'Content-Type: application/json' -d '{\"store_identifier\":\"demo-store\",\"username\":\"admin\",\"password\":\"admin1234\"}')"
     ]
   }
 }

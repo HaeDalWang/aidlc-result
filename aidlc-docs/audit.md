@@ -106,3 +106,27 @@
 **Context**: INCEPTION - Units Generation 완료, 사용자 승인 대기 중.
 
 ---
+
+## CONSTRUCTION - Unit 2 (customer-frontend) Functional Design - Start
+**Timestamp**: 2026-04-07T09:00:00Z
+**User Input**: "넌 Unit 2 고객 프론트 엔드 개발 시작"
+**AI Response**: Unit 2 (customer-frontend) Functional Design 단계 시작. 계획 수립 중.
+**Context**: CONSTRUCTION - Unit 2 Functional Design Part 1 (Planning) 진행 중.
+
+---
+
+## CONSTRUCTION - Unit 2 Functional Design - Q&A
+**Timestamp**: 2026-04-07T09:05:00Z
+**User Input**: "완료" (Q1:A, Q2:A, Q3:A, Q4:A, Q5:B, Q6:A, Q7:B, Q8:A, Q9:A, Q10:C, Q11:C, Q12:A)
+**AI Response**: 답변 분석 완료. 모순 없음. Part 2 설계 문서 생성: business-logic-model.md, business-rules.md, domain-entities.md, frontend-components.md 생성 완료.
+**Context**: CONSTRUCTION - Unit 2 Functional Design Part 2 (Generation) 완료. 승인 대기 중.
+
+---
+
+## CONSTRUCTION - Unit 2 Functional Design - User Approval
+**Timestamp**: 2026-04-07T09:10:00Z
+**User Input**: "계속"
+**AI Response**: Functional Design 승인 확인. NFR Requirements 단계 진행.
+**Context**: CONSTRUCTION - Unit 2 Functional Design 승인 완료. NFR Requirements 시작.
+
+---
