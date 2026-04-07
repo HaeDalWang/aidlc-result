@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>테이블오더</title>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            status: {
+              pending: '#ef4444',
+              preparing: '#eab308',
+              completed: '#22c55e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col max-w-lg mx-auto relative">
+
+  <!-- ==================== 초기 설정 화면 ==================== -->
+  <div id="setup-screen" class="hidden flex flex-col items-center justify-center min-h-screen p-6">
+    <div class="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8">
+      <div class="text-center mb-8">
+        <i class="fa-solid fa-store text-4xl text-orange-500 mb-3"></i>
+        <h1 class="text-2xl font-bold text-gray-800">테이블 초기 설정</h1>
+        <p class="text-sm text-gray-500 mt-1">매장 정보를 입력해 주세요</p>
+      </div>
+
+      <form id="setup-form" class="space-y-4" novalidate>
+        <div>
+          <label for="store-id" class="block text-sm font-medium text-gray-700 mb-1">매장 식별자</label>
+          <input
+            id="store-id"
+            type="text"
+            data-testid="setup-store-id-input"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
+            placeholder="매장 식별자 입력"
+            autocomplete="off"
+          >
+        </div>
+
+        <div>
+          <label for="table-number" class="block text-sm font-medium text-gray-700 mb-1">테이블 번호</label>
+          <input
+            id="table-number"
+            type="number"
+            data-testid="setup-table-number-input"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
+            placeholder="테이블 번호 입력"
+            min="1"
+          >
+        </div>
+
+        <div>
+          <label for="table-password" class="block text-sm font-medium text-gray-700 mb-1">비밀번호</label>
+          <input
+            id="table-password"
+            type="password"
+            data-testid="setup-password-input"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
+            placeholder="비밀번호 입력"
+          >
+        </div>
+
+        <div id="setup-error" class="hidden text-sm text-red-500 bg-red-50 rounded-lg px-4 py-3" role="alert"></div>
+
+        <button
+          type="submit"
+          id="setup-btn"
+          data-testid="setup-submit-btn"
+          disabled
+          class="w-full bg-orange-500 text-white rounded-lg py-3 text-base font-semibold
+                 disabled:opacity-40 disabled:cursor-not-allowed
+                 active:scale-95 transition-transform"
+        >
+          설정 완료
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== 메인 앱 ==================== -->
+  <div id="main-app" class="hidden flex flex-col min-h-screen">
+
+    <!-- 헤더 -->
+    <header class="bg-white shadow-sm px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+      <div>
+        <p id="store-name" class="text-xs text-gray-500">매장명</p>
+        <p id="table-info" class="text-base font-bold text-gray-800">테이블 -</p>
+      </div>
+      <button
+        id="settings-btn"
+        data-testid="settings-btn"
+        class="text-gray-400 hover:text-gray-600 p-2 rounded-lg active:bg-gray-100"
+        aria-label="설정"
+      >
+        <i class="fa-solid fa-gear text-lg"></i>
+      </button>
+    </header>
+
+    <!-- 콘텐츠 영역 -->
+    <main class="flex-1 overflow-y-auto pb-20">
+
+      <!-- 메뉴 화면 -->
+      <div id="menu-view" class="hidden">
+        <div id="category-tabs" class="bg-white border-b border-gray-200 sticky top-14 z-10 flex overflow-x-auto scrollbar-hide px-2 py-2 gap-2">
+          <!-- 카테고리 탭 동적 생성 -->
+        </div>
+        <div id="menu-grid" class="p-4 space-y-6">
+          <!-- 카테고리 섹션 동적 생성 -->
+        </div>
+        <div id="menu-empty" class="hidden text-center text-gray-400 py-20">
+          <i class="fa-solid fa-utensils text-4xl mb-3"></i>
+          <p>등록된 메뉴가 없습니다.</p>
+        </div>
+      </div>
+
+      <!-- 장바구니 화면 -->
+      <div id="cart-view" class="hidden p-4">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">장바구니</h2>
+        <div id="cart-item-list" class="space-y-3">
+          <!-- 장바구니 아이템 동적 생성 -->
+        </div>
+        <div id="cart-empty" class="hidden text-center text-gray-400 py-20">
+          <i class="fa-solid fa-shopping-cart text-4xl mb-3"></i>
+          <p>장바구니가 비어있습니다.</p>
+        </div>
+        <div id="cart-footer" class="hidden mt-4 space-y-3">
+          <div class="flex justify-between items-center bg-white rounded-xl p-4 shadow-sm">
+            <span class="font-semibold text-gray-700">총 금액</span>
+            <span id="cart-total" class="text-xl font-bold text-orange-500">0원</span>
+          </div>
+          <button
+            id="clear-cart-btn"
+            data-testid="clear-cart-btn"
+            class="w-full border border-gray-300 text-gray-600 rounded-xl py-3 font-medium active:bg-gray-50"
+          >
+            장바구니 비우기
+          </button>
+          <button
+            id="order-btn"
+            data-testid="order-btn"
+            disabled
+            class="w-full bg-orange-500 text-white rounded-xl py-3 font-semibold text-base
+                   disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition-transform"
+          >
+            주문하기
+          </button>
+        </div>
+      </div>
+
+      <!-- 주문내역 화면 -->
+      <div id="order-history-view" class="hidden p-4">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">주문 내역</h2>
+        <div id="sse-status-bar" class="hidden mb-3 bg-red-50 border border-red-200 rounded-lg px-4 py-2 text-sm text-red-600">
+          <i class="fa-solid fa-wifi-slash mr-1"></i>
+          실시간 업데이트 연결이 끊겼습니다. 페이지를 새로고침해 주세요.
+        </div>
+        <div id="order-list" class="space-y-4">
+          <!-- 주문 카드 동적 생성 -->
+        </div>
+        <div id="order-empty" class="hidden text-center text-gray-400 py-20">
+          <i class="fa-solid fa-receipt text-4xl mb-3"></i>
+          <p>아직 주문 내역이 없습니다.</p>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- 하단 탭 네비게이션 -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-lg mx-auto bg-white border-t border-gray-200 flex z-10">
+      <button
+        data-tab="menu"
+        data-testid="tab-menu"
+        class="tab-btn flex-1 flex flex-col items-center justify-center py-3 text-gray-400 active:bg-gray-50"
+      >
+        <i class="fa-solid fa-utensils text-xl mb-1"></i>
+        <span class="text-xs">메뉴</span>
+      </button>
+      <button
+        data-tab="cart"
+        data-testid="tab-cart"
+        class="tab-btn flex-1 flex flex-col items-center justify-center py-3 text-gray-400 active:bg-gray-50 relative"
+      >
+        <i class="fa-solid fa-shopping-cart text-xl mb-1"></i>
+        <span class="text-xs">장바구니</span>
+        <span id="cart-dot" class="hidden absolute top-2 right-6 w-2 h-2 bg-red-500 rounded-full"></span>
+      </button>
+      <button
+        data-tab="orders"
+        data-testid="tab-orders"
+        class="tab-btn flex-1 flex flex-col items-center justify-center py-3 text-gray-400 active:bg-gray-50"
+      >
+        <i class="fa-solid fa-receipt text-xl mb-1"></i>
+        <span class="text-xs">주문내역</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ==================== 메뉴 상세 모달 ==================== -->
+  <div id="menu-detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center px-4">
+    <div id="menu-modal-overlay" class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-xl">
+      <button
+        id="menu-modal-close"
+        data-testid="menu-modal-close"
+        class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 p-2 z-10"
+        aria-label="닫기"
+      >
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+      <div id="menu-modal-img-wrap" class="h-48 bg-gray-100 overflow-hidden">
+        <img id="menu-modal-image" src="" alt="" class="w-full h-full object-cover">
+      </div>
+      <div class="p-5">
+        <h3 id="menu-modal-name" class="text-xl font-bold text-gray-800 mb-1"></h3>
+        <p id="menu-modal-price" class="text-lg font-semibold text-orange-500 mb-3"></p>
+        <p id="menu-modal-description" class="text-sm text-gray-500 mb-4"></p>
+        <div class="flex items-center justify-between bg-gray-50 rounded-xl p-3">
+          <button
+            id="modal-qty-decrease"
+            data-testid="modal-qty-decrease"
+            class="w-11 h-11 flex items-center justify-center bg-white rounded-lg shadow text-gray-700 text-lg font-bold active:scale-90 transition-transform"
+          >
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span id="modal-qty-display" class="text-xl font-bold text-gray-800 w-10 text-center">0</span>
+          <button
+            id="modal-qty-increase"
+            data-testid="modal-qty-increase"
+            class="w-11 h-11 flex items-center justify-center bg-orange-500 rounded-lg shadow text-white text-lg font-bold active:scale-90 transition-transform"
+          >
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+        <button
+          id="modal-add-to-cart"
+          data-testid="modal-add-to-cart"
+          class="w-full mt-4 bg-orange-500 text-white rounded-xl py-3 font-semibold active:scale-95 transition-transform"
+        >
+          장바구니 담기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 주문 확인 모달 ==================== -->
+  <div id="order-confirm-modal" class="hidden fixed inset-0 z-50 flex items-end justify-center px-0">
+    <div id="order-modal-overlay" class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative bg-white rounded-t-2xl w-full max-w-lg p-6 shadow-xl">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">주문 확인</h2>
+      <div id="order-confirm-items" class="space-y-2 max-h-60 overflow-y-auto mb-4">
+        <!-- 주문 항목 동적 생성 -->
+      </div>
+      <div class="flex justify-between items-center border-t border-gray-100 pt-4 mb-5">
+        <span class="font-semibold text-gray-700">총 금액</span>
+        <span id="order-confirm-total" class="text-xl font-bold text-orange-500"></span>
+      </div>
+      <div class="flex gap-3">
+        <button
+          id="order-cancel-btn"
+          data-testid="order-cancel-btn"
+          class="flex-1 border border-gray-300 text-gray-600 rounded-xl py-3 font-medium active:bg-gray-50"
+        >
+          취소
+        </button>
+        <button
+          id="order-confirm-btn"
+          data-testid="order-confirm-btn"
+          class="flex-1 bg-orange-500 text-white rounded-xl py-3 font-semibold active:scale-95 transition-transform
+                 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          확인
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 토스트 메시지 ==================== -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="hidden fixed bottom-24 left-1/2 -translate-x-1/2 z-50
+           bg-gray-800 text-white text-sm font-medium px-5 py-3 rounded-full shadow-lg
+           max-w-xs text-center"
+  ></div>
+
+  <!-- dayjs CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <!-- Vite 번들 -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
