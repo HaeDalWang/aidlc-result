@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  base: '/customer/',
   build: {
     outDir: '../static/customer',
     emptyOutDir: true
