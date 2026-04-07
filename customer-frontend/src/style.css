@@ -189,8 +189,8 @@
   to   { transform: translateY(0); }
 }
 
-/* 가로 모드 경고 오버레이 */
-@media (orientation: landscape) {
+/* 가로 모드 경고 오버레이 - 임시 비활성화 (웹 테스트용) */
+/* @media (orientation: landscape) {
   body::before {
     content: '세로 모드로 전환해 주세요';
     position: fixed;
@@ -204,4 +204,4 @@
     justify-content: center;
     z-index: 9999;
   }
-}
+} */
