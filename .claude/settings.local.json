@@ -20,7 +20,15 @@
       "Bash(python3 -m pip install -r requirements.txt -q)",
       "Bash(python3:*)",
       "Bash(curl -s http://localhost:8000/)",
-      "Bash(curl -s -X POST http://localhost:8000/api/auth/admin-login -H 'Content-Type: application/json' -d '{\"store_identifier\":\"demo-store\",\"username\":\"admin\",\"password\":\"admin1234\"}')"
+      "Bash(curl -s -X POST http://localhost:8000/api/auth/admin-login -H 'Content-Type: application/json' -d '{\"store_identifier\":\"demo-store\",\"username\":\"admin\",\"password\":\"admin1234\"}')",
+      "Bash(git fetch:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(git reset:*)",
+      "Bash(git merge:*)",
+      "Bash(git stash:*)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
