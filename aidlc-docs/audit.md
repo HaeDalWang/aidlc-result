@@ -106,3 +106,50 @@
 **Context**: INCEPTION - Units Generation 완료, 사용자 승인 대기 중.
 
 ---
+
+## CONSTRUCTION - Unit 2 (customer-frontend) Functional Design - Start
+**Timestamp**: 2026-04-07T09:00:00Z
+**User Input**: "넌 Unit 2 고객 프론트 엔드 개발 시작"
+**AI Response**: Unit 2 Functional Design 계획 수립. 12개 질문 생성.
+**Context**: CONSTRUCTION - Unit 2 Functional Design Part 1 (Planning) 완료.
+
+---
+
+## CONSTRUCTION - Unit 2 Functional Design - Q&A
+**Timestamp**: 2026-04-07T09:05:00Z
+**User Input**: "완료" (Q1:A, Q2:A, Q3:A, Q4:A, Q5:B, Q6:A, Q7:B, Q8:A, Q9:A, Q10:C, Q11:C, Q12:A)
+**AI Response**: 설계 문서 4개 생성 완료 (business-logic-model.md, business-rules.md, domain-entities.md, frontend-components.md).
+**Context**: CONSTRUCTION - Unit 2 Functional Design Part 2 (Generation) 완료.
+
+---
+
+## CONSTRUCTION - Unit 2 Functional Design - User Approval
+**Timestamp**: 2026-04-07T09:10:00Z
+**User Input**: "계속"
+**AI Response**: Functional Design 승인 확인. NFR Requirements 단계 진행.
+**Context**: CONSTRUCTION - Unit 2 Functional Design 승인 완료.
+
+---
+
+## CONSTRUCTION - Unit 2 NFR Requirements - Q&A
+**Timestamp**: 2026-04-07T09:15:00Z
+**User Input**: "완료" + 명확화 "A로 하자" (Q1:B-Vite, Q2:B-TailwindCDN, Q3:D, Q4:A, Q5:A, Q6:B / 명확화: Tailwind Play CDN 확정)
+**AI Response**: nfr-requirements.md, tech-stack-decisions.md 생성 완료.
+**Context**: CONSTRUCTION - Unit 2 NFR Requirements 완료. 승인 대기 중.
+
+---
+
+## CONSTRUCTION - Unit 2 NFR Requirements - User Approval
+**Timestamp**: 2026-04-07T09:20:00Z
+**User Input**: "Continue"
+**AI Response**: NFR Requirements 승인 확인. NFR Design 단계 진행.
+**Context**: CONSTRUCTION - Unit 2 NFR Requirements 승인 완료.
+
+---
+
+## CONSTRUCTION - Unit 2 NFR Design - Complete
+**Timestamp**: 2026-04-07T09:25:00Z
+**AI Response**: NFR Design 문서 2개 생성 완료 (nfr-design-patterns.md, logical-components.md). 질문 없음 - tech stack 명확.
+**Context**: CONSTRUCTION - Unit 2 NFR Design 완료. 승인 대기 중.
+
+---

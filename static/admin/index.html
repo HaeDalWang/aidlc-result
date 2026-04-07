@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>테이블오더 관리자</title>
+  <link rel="stylesheet" href="/admin/css/style.css">
+</head>
+<body>
+
+  <!-- 로그인 화면 -->
+  <div id="login-screen">
+    <div class="login-card">
+      <h1>테이블오더 관리자</h1>
+      <form data-testid="login-form" id="login-form">
+        <div class="form-group">
+          <label>매장 식별자</label>
+          <input data-testid="login-store-input" id="login-store" type="text" placeholder="demo-store" required>
+        </div>
+        <div class="form-group">
+          <label>사용자명</label>
+          <input data-testid="login-username-input" id="login-username" type="text" placeholder="admin" required>
+        </div>
+        <div class="form-group">
+          <label>비밀번호</label>
+          <input data-testid="login-password-input" id="login-password" type="password" placeholder="••••••••" required>
+        </div>
+        <p data-testid="login-error-message" id="login-error" class="error-msg hidden"></p>
+        <button data-testid="login-submit-button" type="submit" id="login-btn">로그인</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 대시보드 화면 -->
+  <div id="dashboard-screen" class="hidden">
+    <header id="header">
+      <div class="header-left">
+        <h2 data-testid="header-store-name" id="header-store-name">테이블오더</h2>
+      </div>
+      <div class="header-right">
+        <span data-testid="sse-status-indicator" id="sse-status" class="sse-disconnected" title="SSE 연결 상태">●</span>
+        <span id="sse-status-text">연결 중...</span>
+        <button data-testid="logout-button" id="logout-btn">로그아웃</button>
+      </div>
+    </header>
+
+    <div id="filter-bar" data-testid="filter-bar">
+      <button data-testid="filter-all-button" class="filter-btn active" data-table-id="">전체</button>
+    </div>
+
+    <main id="tables-grid"></main>
+  </div>
+
+  <!-- 주문 상세 모달 -->
+  <div data-testid="order-detail-modal" id="order-detail-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 data-testid="order-detail-title" id="order-detail-title">주문 상세</h3>
+        <button data-testid="order-detail-close-button" id="order-detail-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>상태: <span data-testid="order-detail-status" id="order-detail-status"></span></p>
+        <ul data-testid="order-detail-items" id="order-detail-items"></ul>
+        <p class="total">합계: <strong data-testid="order-detail-total" id="order-detail-total"></strong></p>
+      </div>
+      <div class="modal-actions">
+        <button data-testid="order-start-prepare-button" id="order-prepare-btn" class="btn-primary hidden">준비 시작</button>
+        <button data-testid="order-complete-button" id="order-complete-btn" class="btn-primary hidden">완료 처리</button>
+        <button data-testid="order-delete-button" id="order-delete-btn" class="btn-danger">주문 삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 과거 내역 모달 -->
+  <div data-testid="history-modal" id="history-modal" class="modal hidden">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 data-testid="history-modal-title" id="history-modal-title">과거 주문 내역</h3>
+        <button data-testid="history-close-button" id="history-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div data-testid="history-date-filter" class="date-filter">
+          <input data-testid="history-date-from" id="history-date-from" type="date">
+          <span>~</span>
+          <input data-testid="history-date-to" id="history-date-to" type="date">
+          <button data-testid="history-search-button" id="history-search-btn">조회</button>
+        </div>
+        <div data-testid="history-list" id="history-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 확인 팝업 -->
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-content modal-sm">
+      <p id="confirm-message"></p>
+      <div class="modal-actions">
+        <button id="confirm-ok-btn" class="btn-danger">확인</button>
+        <button id="confirm-cancel-btn" class="btn-secondary">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 토스트 컨테이너 -->
+  <div id="toast-container"></div>
+
+  <script src="/admin/js/api.js"></script>
+  <script src="/admin/js/auth.js"></script>
+  <script src="/admin/js/sse.js"></script>
+  <script src="/admin/js/order-detail.js"></script>
+  <script src="/admin/js/past-history.js"></script>
+  <script src="/admin/js/dashboard.js"></script>
+</body>
+</html>
