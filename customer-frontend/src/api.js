@@ -59,9 +59,9 @@ async function request(method, path, body = null) {
 // US-001, US-002: 테이블 로그인
 export async function login(storeId, tableNumber, password) {
   return request('POST', '/api/auth/table-login', {
-    store_id: storeId,
+    store_identifier: storeId,
     table_number: Number(tableNumber),
-    password
+    table_password: password
   })
 }
 
