@@ -4,7 +4,7 @@
 - **Project Name**: 테이블오더 서비스
 - **Project Type**: Greenfield
 - **Start Date**: 2026-04-07T00:00:00Z
-- **Current Stage**: CONSTRUCTION - Unit 1 (backend-api) Code Generation Complete
+- **Current Stage**: CONSTRUCTION - All Units Code Generation Complete
 
 ## Workspace State
 - **Existing Code**: No
@@ -46,17 +46,17 @@
 
 #### Unit 2: Customer Frontend
 - [x] Functional Design
-- [ ] NFR Requirements
-- [ ] NFR Design
+- [x] NFR Requirements
+- [x] NFR Design
 - [ ] Infrastructure Design (SKIP - 로컬 개발 환경)
-- [ ] Code Generation
+- [x] Code Generation
 
 #### Unit 3: Admin Frontend
-- [ ] Functional Design
-- [ ] NFR Requirements
-- [ ] NFR Design
+- [x] Functional Design
+- [x] NFR Requirements
+- [x] NFR Design
 - [ ] Infrastructure Design (SKIP - 로컬 개발 환경)
-- [ ] Code Generation
+- [x] Code Generation
 
 - [ ] Build and Test
 
